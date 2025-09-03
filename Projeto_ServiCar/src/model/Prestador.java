@@ -10,7 +10,7 @@ public class Prestador {
 	private String email;
 	private String comissao;
 	private String observacoes;
-	
+	// YTESTETTE
 	
 	public Prestador(String id, String nome, String cpf_cnpj, String funcao, String telefone, String email,
 			String comissao, String observacoes) {
