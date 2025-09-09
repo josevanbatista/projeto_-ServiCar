@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ConnectionFactory.ConnectionDatabase;
+import connectionFactory.ConnectionDataBase;
+import model.Funcionario;
 import model.Prestador;
 
 public class PrestadorDao {
@@ -147,4 +149,35 @@ public class PrestadorDao {
             ConnectionDatabase.closeConnection(con, stmt);
         }
     }
+    
+    public Prestador autenticarUser(String user, String password) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Prestador prestador = new Prestador();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Funcionario where cpfFuncionario = ? and senha = ?");
+			stmt.setString(1, user);
+			stmt.setString(2, password);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				
+				prestador.setId(rs.getString("idPrestador"));
+                prestador.setNome(rs.getString("nome"));
+                prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
+                prestador.setFuncao(rs.getString("funcao"));
+                prestador.setTelefone(rs.getString("telefone"));
+                prestador.setEmail(rs.getString("email"));
+                prestador.setComissao(rs.getString("comissao"));
+                prestador.setObservacoes(rs.getString("observacoes"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Erro ao pesquisar os dados!",e);
+		}finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
+		return prestador;
+	}
+    
 }
