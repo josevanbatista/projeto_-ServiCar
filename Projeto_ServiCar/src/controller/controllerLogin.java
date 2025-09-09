@@ -3,12 +3,15 @@ package controller;
 import java.io.IOException;
 
 import application.Main;
+import dao.FuncionarioDAO;
+import dao.PrestadorDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import model.Funcionario;
 import model.Prestador;
 import javafx.scene.control.Alert.AlertType;
 
@@ -22,21 +25,23 @@ public class controllerLogin {
 
 	@FXML
 	private TextField txtUsuario;
-//oeovruhreunvo
+
+	static Prestador prestador = new Prestador();
+	PrestadorDao prestaDAO = new PrestadorDao();
+
 	@FXML
 	void actionLogin(ActionEvent event) throws IOException {
 		String user = txtUsuario.getText();
 		String password = txtSenha.getText();
-		
-		Prestador = PrestadorDAO.autenticarUser(user, password);
-		if (!funcionario.equals(null)) {
+		prestador = prestaDAO.autenticarUser(user, password);
+		if (!prestador.equals(null)) {
 			if (user.equals("") || password.equals("")) {
 				Alert erro = new Alert(AlertType.ERROR);
 				erro.setTitle("Erro de Login !");
 				erro.setHeaderText("Falha ao Tentar Realizar Login");
 				erro.setContentText("Verifique as informações e tente novamente !");
 				erro.show();
-			} else if (funcionario.getCpfFuncionario().equals(user) && funcionario.getSenha().equals(password)) {
+			} else if (prestador.getCpf_cnpj().equals(user) && prestador.get().equals(password)) {
 				Alert saudacao = new Alert(AlertType.INFORMATION);
 				saudacao.setTitle("Seja Bem Vindo !");
 				saudacao.setHeaderText(" bem-vindo de colta !");
