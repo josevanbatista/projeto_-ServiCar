@@ -37,7 +37,6 @@ public class Prestador {
 
 
 
-<<<<<<< HEAD
 	public String getSenha() {
 		return senha;
 	}
@@ -51,10 +50,7 @@ public class Prestador {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-=======
-	public Prestador() {
-		// TODO Auto-generated constructor stub
->>>>>>> branch 'master' of https://github.com/josevanbatista/projeto_-ServiCar.git
+
 	}
 
 
