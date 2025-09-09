@@ -28,9 +28,9 @@ public class Prestador {
 		this.senha = senha;
 	}
 
-	public Prestador() {
+	public Prestador()  {
 		// TODO Auto-generated constructor stub
-	}
+	} 
 
 	public String getSenha() {
 		return senha;
