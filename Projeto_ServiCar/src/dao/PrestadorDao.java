@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ConnectionFactory.ConnectionDatabase;
-import connectionFactory.ConnectionDataBase;
-import model.Funcionario;
 import model.Prestador;
 
 public class PrestadorDao {
@@ -47,7 +45,7 @@ public class PrestadorDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Prestador prestador = new Prestador(null, null, null, null, null, null, null, null);
+                Prestador prestador = new Prestador();
                 prestador.setId(rs.getString("idPrestador"));
                 prestador.setNome(rs.getString("nome"));
                 prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
@@ -101,7 +99,7 @@ public class PrestadorDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Prestador prestador = new Prestador(pesquisar, pesquisar, pesquisar, pesquisar, pesquisar, pesquisar, pesquisar, pesquisar);
+                Prestador prestador = new Prestador();
                 prestador.setId(rs.getString("idPrestador"));
                 prestador.setNome(rs.getString("nome"));
                 prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
@@ -129,7 +127,7 @@ public class PrestadorDao {
 
         try {
             stmt = con.prepareStatement(
-                "UPDATE Prestador SET nome = ?, cpf_cnpj = ?, funcao = ?, telefone = ?, email = ?, comissao = ?, observacoes = ? WHERE idPrestador = ?"
+                "UPDATE Prestador SET nome = ?, cpf_cnpj = ?, funcao = ?, telefone = ?, email = ?, comissao = ?, observacoes = ?, senha = ? WHERE idPrestador = ?"
             );
 
             stmt.setString(1, prestador.getNome());
@@ -139,7 +137,9 @@ public class PrestadorDao {
             stmt.setString(5, prestador.getEmail());
             stmt.setString(6, prestador.getComissao());
             stmt.setString(7, prestador.getObservacoes());
-            stmt.setString(8, prestador.getId());
+            stmt.setString(8, prestador.getSenha());
+            stmt.setString(9, prestador.getId());
+            
 
             stmt.executeUpdate();
             System.out.println("Prestador atualizado!");
@@ -170,6 +170,7 @@ public class PrestadorDao {
                 prestador.setEmail(rs.getString("email"));
                 prestador.setComissao(rs.getString("comissao"));
                 prestador.setObservacoes(rs.getString("observacoes"));
+                prestador.setSenha(rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

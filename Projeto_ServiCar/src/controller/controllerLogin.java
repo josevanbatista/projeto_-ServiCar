@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 
 import application.Main;
-import dao.FuncionarioDAO;
 import dao.PrestadorDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.Funcionario;
 import model.Prestador;
 import javafx.scene.control.Alert.AlertType;
 
@@ -41,11 +39,11 @@ public class controllerLogin {
 				erro.setHeaderText("Falha ao Tentar Realizar Login");
 				erro.setContentText("Verifique as informações e tente novamente !");
 				erro.show();
-			} else if (prestador.getCpf_cnpj().equals(user) && prestador.get().equals(password)) {
+			} else if (prestador.getCpf_cnpj().equals(user) && prestador.getSenha().equals(password)) {
 				Alert saudacao = new Alert(AlertType.INFORMATION);
 				saudacao.setTitle("Seja Bem Vindo !");
 				saudacao.setHeaderText(" bem-vindo de colta !");
-				saudacao.setContentText("Ola! seja bem-vindo " + funcionario.getNomeFuncionario() + "!");
+				saudacao.setContentText("Ola! seja bem-vindo " + prestador.getNome() + "!");
 				saudacao.show();
 				Main.TelaHome();
 			}
