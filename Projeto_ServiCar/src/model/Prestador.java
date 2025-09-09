@@ -35,6 +35,17 @@ public class Prestador {
 
 
 
+	public Prestador() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+
+
+
 	public String getId() {
 		return id;
 	}
