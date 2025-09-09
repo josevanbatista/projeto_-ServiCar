@@ -30,22 +30,15 @@ public class Prestador {
 		this.senha = senha;
 	}
 	
-	
-	
-	
-
-
-
 
 	public String getSenha() {
 		return senha;
 	}
 
 
-
-
-
-
+	public Prestador() {
+		super();
+	}
 
 
 	public void setSenha(String senha) {
