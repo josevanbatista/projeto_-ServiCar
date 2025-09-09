@@ -13,10 +13,11 @@ public class Prestador {
 	private String email;
 	private String comissao;
 	private String observacoes;
+	private String senha;
 	
 	
 	public Prestador(String id, String nome, String cpf_cnpj, String funcao, String telefone, String email,
-			String comissao, String observacoes) {
+			String comissao, String observacoes, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -26,11 +27,34 @@ public class Prestador {
 		this.email = email;
 		this.comissao = comissao;
 		this.observacoes = observacoes;
+		this.senha = senha;
 	}
 	
 	
 	
 	
+
+
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+
+
+
+
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
+
+
 
 
 
