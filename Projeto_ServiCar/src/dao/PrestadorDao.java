@@ -156,13 +156,13 @@ public class PrestadorDao {
 		ResultSet rs = null;
 		Prestador prestador = new Prestador();
 		try {
-			stmt = con.prepareStatement("SELECT * FROM Funcionario where cpfFuncionario = ? and senha = ?");
+			stmt = con.prepareStatement("SELECT * FROM Prestador where cpf_cnpj = ? and senha = ?");
 			stmt.setString(1, user);
 			stmt.setString(2, password);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				
-				prestador.setId(rs.getString("idPrestador"));
+				prestador.setId(rs.getString("id"));
                 prestador.setNome(rs.getString("nome"));
                 prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
                 prestador.setFuncao(rs.getString("funcao"));

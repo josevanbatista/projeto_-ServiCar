@@ -32,6 +32,8 @@ public class controllerLogin {
 		String user = txtUsuario.getText();
 		String password = txtSenha.getText();
 		prestador = prestaDAO.autenticarUser(user, password);
+		System.out.println(prestador.getNome()); 
+		
 		if (!prestador.equals(null)) {
 			if (user.equals("") || password.equals("")) {
 				Alert erro = new Alert(AlertType.ERROR);
@@ -42,7 +44,7 @@ public class controllerLogin {
 			} else if (prestador.getCpf_cnpj().equals(user) && prestador.getSenha().equals(password)) {
 				Alert saudacao = new Alert(AlertType.INFORMATION);
 				saudacao.setTitle("Seja Bem Vindo !");
-				saudacao.setHeaderText(" bem-vindo de colta !");
+				saudacao.setHeaderText(" bem-vindo de volta !");
 				saudacao.setContentText("Ola! seja bem-vindo " + prestador.getNome() + "!");
 				saudacao.show();
 				Main.TelaHome();

@@ -11,7 +11,7 @@ public class ConnectionDatabase {
 	// endereço do driver sql server
 	private static final String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	// endereco do banco de dados
-	private static final String URL = "jdbc:sqlserver://192.168.60.134:61575;encrypt=false;databaseName=servicar";
+	private static final String URL = "jdbc:sqlserver://192.168.60.101:61575;encrypt=false;databaseName=servicar";
 	// usuario do banco de dados
 	private static final String user = "sa";
 	// Senha do banco de dados
