@@ -14,7 +14,7 @@
          <children>
             <Pane layoutX="23.0" layoutY="16.0" prefHeight="696.0" prefWidth="466.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
-                  <Button fx:id="btCadastroVeiculos" layoutX="25.0" layoutY="206.0" mnemonicParsing="false" onAction="#actionCadastroVeiculos" prefHeight="83.0" prefWidth="436.0" style="-fx-background-radius: 15; -fx-background-color: #004987;" text="        Cadastro de Veiculos" textFill="WHITE">
+                  <Button fx:id="btCadastroVeiculos" layoutX="25.0" layoutY="206.0" mnemonicParsing="false" onAction="#actionCadastroVeiculos" prefHeight="83.0" prefWidth="436.0" style="-fx-background-radius: 15; -fx-background-color: #004987;" text="        Cadastro de Serviços" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
