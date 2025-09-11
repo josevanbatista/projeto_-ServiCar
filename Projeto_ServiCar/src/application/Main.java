@@ -33,6 +33,18 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void TelaLogin() throws IOException {
+		FXMLLoader fxmlLogin = new FXMLLoader();
+		fxmlLogin.setLocation(Main.class.getResource("/view/viewLogin.fxml"));
+		Parent TelaLogin = fxmlLogin.load();
+		main = new Scene(TelaLogin);
+		stage.setTitle("ServiCar - Tela De Login");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
 
 	public static void TelaHome() throws IOException {
 		FXMLLoader fxmlHome = new FXMLLoader();
@@ -40,6 +52,42 @@ public class Main extends Application {
 		Parent TelaHome = fxmlHome.load();
 		main = new Scene(TelaHome);
 		stage.setTitle("ServiCar - Menu Principal");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	public static void TelaCadastroServico() throws IOException {
+		FXMLLoader fxmlCadastroServico = new FXMLLoader();
+		fxmlCadastroServico.setLocation(Main.class.getResource("/view/viewCadastroDeServicos.fxml"));
+		Parent CadastroServico = fxmlCadastroServico.load();
+		main = new Scene(CadastroServico);
+		stage.setTitle("ServiCar - Casdastro de Serviços");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	public static void TelaCadastroPrestadores() throws IOException {
+		FXMLLoader fxmlCadastroPrestadores= new FXMLLoader();
+		fxmlCadastroPrestadores.setLocation(Main.class.getResource("/view/viewCadastroPrestadores.fxml"));
+		Parent CadastroPrestadores = fxmlCadastroPrestadores.load();
+		main = new Scene(CadastroPrestadores);
+		stage.setTitle("ServiCar - Casdastro De Prestadores");
+		stage.setScene(main);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	public static void TelaRegidstroDeServicos() throws IOException {
+		FXMLLoader fxmlRegidstroDeServicos= new FXMLLoader();
+		fxmlRegidstroDeServicos.setLocation(Main.class.getResource("/view/viewRegistroDeServicos.fxml"));
+		Parent RegidstroDeServicos = fxmlRegidstroDeServicos.load();
+		main = new Scene(RegidstroDeServicos);
+		stage.setTitle("ServiCar - Casdastro De Prestadores");
 		stage.setScene(main);
 		stage.setResizable(false);
 		stage.centerOnScreen();
