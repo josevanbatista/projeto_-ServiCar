@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,13 +70,13 @@ public class controllerRegistroDeServicos {
 	}
 
 	@FXML
-	void actionCadastroPrestadores(ActionEvent event) {
-
+	void actionCadastroPrestadores(ActionEvent event) throws IOException {
+		Main.TelaCadastroPrestadores();
 	}
 
 	@FXML
-	void actionCadastroVeiculos(ActionEvent event) {
-
+	void actionCadastroVeiculos(ActionEvent event) throws IOException {
+		Main.TelaCadastroServico();
 	}
 
 	@FXML
@@ -82,13 +85,13 @@ public class controllerRegistroDeServicos {
 	}
 
 	@FXML
-	void actionRegistroServicos(ActionEvent event) {
-
+	void actionRegistroServicos(ActionEvent event) throws IOException {
+		Main.TelaRegidstroDeServicos();
 	}
 
 	@FXML
-	void actionSair(ActionEvent event) {
-
+	void actionSair(ActionEvent event) throws IOException {
+		Main.TelaLogin();
 	}
 
 }
