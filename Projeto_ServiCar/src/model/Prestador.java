@@ -118,8 +118,8 @@ public class Prestador {
 	}
 
 
-	public void setComissao(String comissao) {
-		this.comissao = comissao;
+	public void setComissao(double d) {
+		this.comissao = d;
 	}
 
 
@@ -130,6 +130,12 @@ public class Prestador {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+
+	public void txtAreaEspecializada(String text) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
