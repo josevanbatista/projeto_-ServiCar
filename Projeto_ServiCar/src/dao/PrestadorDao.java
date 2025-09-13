@@ -22,7 +22,7 @@ public class PrestadorDao {
             stmt.setString(3, prestador.getFuncao());
             stmt.setString(4, prestador.getTelefone());
             stmt.setString(5, prestador.getEmail());
-            stmt.setString(6, prestador.getComissao());
+            stmt.setDouble(6, prestador.getComissao());
             stmt.setString(7, prestador.getObservacoes());
 
             stmt.execute();
@@ -52,7 +52,7 @@ public class PrestadorDao {
                 prestador.setFuncao(rs.getString("funcao"));
                 prestador.setTelefone(rs.getString("telefone"));
                 prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getString("comissao"));
+                prestador.setComissao(rs.getDouble("comissao"));
                 prestador.setObservacoes(rs.getString("observacoes"));
 
                 prestadores.add(prestador);
@@ -106,7 +106,7 @@ public class PrestadorDao {
                 prestador.setFuncao(rs.getString("funcao"));
                 prestador.setTelefone(rs.getString("telefone"));
                 prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getString("comissao"));
+                prestador.setComissao(rs.getDouble("comissao"));
                 prestador.setObservacoes(rs.getString("observacoes"));
 
                 prestadores.add(prestador);
@@ -135,7 +135,7 @@ public class PrestadorDao {
             stmt.setString(3, prestador.getFuncao());
             stmt.setString(4, prestador.getTelefone());
             stmt.setString(5, prestador.getEmail());
-            stmt.setString(6, prestador.getComissao());
+            stmt.setDouble(6, prestador.getComissao());
             stmt.setString(7, prestador.getObservacoes());
             stmt.setString(8, prestador.getSenha());
             stmt.setString(9, prestador.getId());
@@ -168,7 +168,7 @@ public class PrestadorDao {
                 prestador.setFuncao(rs.getString("funcao"));
                 prestador.setTelefone(rs.getString("telefone"));
                 prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getString("comissao"));
+                prestador.setComissao(rs.getDouble("comissao"));
                 prestador.setObservacoes(rs.getString("observacoes"));
                 prestador.setSenha(rs.getString("senha"));
 			}
