@@ -28,6 +28,11 @@ public class Servico {
 	}
 
 
+	public Servico() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getId() {
 		return id;
 	}
