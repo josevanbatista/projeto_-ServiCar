@@ -22,8 +22,8 @@ public class ServicoDao {
             stmt.setString(2, servico.getPrestador_id());
             stmt.setString(3, servico.getData_servico());
             stmt.setString(4, servico.getDescricao());
-            stmt.setString(5, servico.getValor_total());
-            stmt.setString(6, servico.getValor_comissao());
+            stmt.setDouble(5, servico.getValor_total());
+            stmt.setDouble(6, servico.getValor_comissao());
             stmt.setString(7, servico.getForma_pagamento());
             stmt.setString(8, servico.getComprovante_path());
 
@@ -54,8 +54,8 @@ public class ServicoDao {
                     rs.getString("prestador_id"),
                     rs.getString("data_servico"),
                     rs.getString("descricao"),
-                    rs.getString("valor_total"),
-                    rs.getString("valor_comissao"),
+                    rs.getDouble("valor_total"),
+                    rs.getDouble("valor_comissao"),
                     rs.getString("forma_pagamento"),
                     rs.getString("comprovante_path")
                 );
@@ -100,8 +100,8 @@ public class ServicoDao {
             stmt.setString(2, servico.getPrestador_id());
             stmt.setString(3, servico.getData_servico());
             stmt.setString(4, servico.getDescricao());
-            stmt.setString(5, servico.getValor_total());
-            stmt.setString(6, servico.getValor_comissao());
+            stmt.setDouble(5, servico.getValor_total());
+            stmt.setDouble(6, servico.getValor_comissao());
             stmt.setString(7, servico.getForma_pagamento());
             stmt.setString(8, servico.getComprovante_path());
             stmt.setString(9, servico.getId());
@@ -137,8 +137,8 @@ public class ServicoDao {
                     rs.getString("prestador_id"),
                     rs.getString("data_servico"),
                     rs.getString("descricao"),
-                    rs.getString("valor_total"),
-                    rs.getString("valor_comissao"),
+                    rs.getDouble("valor_total"),
+                    rs.getDouble("valor_comissao"),
                     rs.getString("forma_pagamento"),
                     rs.getString("comprovante_path")
                 );
@@ -170,8 +170,8 @@ public class ServicoDao {
                     rs.getString("prestador_id"),
                     rs.getString("data_servico"),
                     rs.getString("descricao"),
-                    rs.getString("valor_total"),
-                    rs.getString("valor_comissao"),
+                    rs.getDouble("valor_total"),
+                    rs.getDouble("valor_comissao"),
                     rs.getString("forma_pagamento"),
                     rs.getString("comprovante_path")
                 );

@@ -2,6 +2,8 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -9,9 +11,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Prestador;
 
-public class controllerCadastroPrestadores<PrestadorDAO> {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    private static Object prestadorEditar;
+import application.Main;
+import dao.PrestadorDao;
+
+public class  controllerCadastroPrestadores implements Initializable{
+
+	public static Prestador prestadorEditar;
 
 	@FXML
     private Button btCadastrar;
@@ -70,7 +79,7 @@ public class controllerCadastroPrestadores<PrestadorDAO> {
 
         } else {
             Prestador prestador = new Prestador();
-            PrestadorDAO prestadorDAO = new PrestadorDAO();
+            PrestadorDao prestadorDAO = new PrestadorDao();
 
             prestador.setNome(txtNome.getText());
             prestador.setCpf_cnpj(txtCPF.getText());
@@ -100,8 +109,9 @@ public class controllerCadastroPrestadores<PrestadorDAO> {
                 Stage stage = (Stage) btCadastrar.getScene().getWindow();
                 stage.close();
             } else {
-                prestador.setId(controllerCadastroPrestadores.prestadorEditar.getId());
+                prestador.setId(( controllerCadastroPrestadores.prestadorEditar).getId());
                 prestadorDAO.update(prestador);
+               
 
                 Alert msg = new Alert(Alert.AlertType.INFORMATION);
                 msg.setTitle("Sucesso!");
@@ -136,13 +146,14 @@ public class controllerCadastroPrestadores<PrestadorDAO> {
 
 
     @FXML
-    void actionCadastroPrestadores(ActionEvent event) {
+    void actionCadastroPrestadores(ActionEvent event) throws IOException {
+    	Main.TelaHome();
 
     }
 
     @FXML
-    void actionCadastroVeiculos(ActionEvent event) {
-
+    void actionCadastroVeiculos(ActionEvent event) throws IOException {
+    	Main.TelaCadastroServico();
     }
 
     @FXML
@@ -151,13 +162,33 @@ public class controllerCadastroPrestadores<PrestadorDAO> {
     }
 
     @FXML
-    void actionRegistroServicos(ActionEvent event) {
-
+    void actionRegistroServicos(ActionEvent event) throws IOException {
+    	Main.TelaRegidstroDeServicos();
     }
 
     @FXML
-    void actionSair(ActionEvent event) {
+    void actionSair(ActionEvent event) throws IOException {
+    	Main.TelaLogin();
 
     }
 
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+
+		        if (prestadorEditar != null) {
+		            txtNome.setText(prestadorEditar.getNome());
+		            txtCPF.setText(prestadorEditar.getCpf_cnpj());
+		            txtTelefone.setText(prestadorEditar.getTelefone());
+		            txtEmail.setText(prestadorEditar.getEmail());
+		            txtComisao.setText(String.valueOf(prestadorEditar.getComissao()));
+		            txtAreaEspecializada.setText(prestadorEditar.getFuncao());
+
+		            btCadastrar.setText("Atualizar");
+		        }
+		    }
+		
+
 }
+
+

@@ -11,13 +11,14 @@ public class Prestador {
 	private String funcao;
 	private String telefone;
 	private String email;
-	private String comissao;
+	private Double comissao;
 	private String observacoes;
 	private String senha;
+	public Object setId;
 	
 	
 	public Prestador(String id, String nome, String cpf_cnpj, String funcao, String telefone, String email,
-			String comissao, String observacoes, String senha) {
+			Double comissao, String observacoes, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -113,13 +114,13 @@ public class Prestador {
 	}
 
 
-	public String getComissao() {
-		return comissao;
+
+	public double getComissao() {
+	    return comissao;
 	}
 
-
-	public void setComissao(double d) {
-		this.comissao = d;
+	public void setComissao(double comissao) {
+	    this.comissao = comissao;
 	}
 
 
@@ -138,6 +139,13 @@ public class Prestador {
 		
 	}
 
+
+	
+
+
+	
+
+	
 
 	
 	
