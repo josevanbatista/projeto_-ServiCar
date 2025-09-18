@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Servico {
 
 	private String id;
@@ -7,14 +9,14 @@ public class Servico {
 	private String prestador_id;
 	private String data_servico;
 	private String descricao;
-	private String valor_total;
-	private String valor_comissao;
+	private double valor_total;
+	private double valor_comissao;
 	private String forma_pagamento;
 	private String comprovante_path;
 	
 	
 	public Servico(String id, String veiculo_id, String prestador_id, String data_servico, String descricao,
-			String valor_total, String valor_comissao, String forma_pagamento, String comprovante_path) {
+			double valor_total, double valor_comissao, String forma_pagamento, String comprovante_path) {
 		super();
 		this.id = id;
 		this.veiculo_id = veiculo_id;
@@ -83,23 +85,23 @@ public class Servico {
 	}
 
 
-	public String getValor_total() {
+	public double getValor_total() {
 		return valor_total;
 	}
 
 
-	public void setValor_total(String valor_total) {
-		this.valor_total = valor_total;
+	public void setValor_total(double valor) {
+		this.valor_total = valor;
 	}
 
 
-	public String getValor_comissao() {
+	public double getValor_comissao() {
 		return valor_comissao;
 	}
 
 
-	public void setValor_comissao(String valor_comissao) {
-		this.valor_comissao = valor_comissao;
+	public void setValor_comissao(double comissao) {
+		this.valor_comissao = comissao;
 	}
 
 
@@ -121,7 +123,38 @@ public class Servico {
 	public void setComprovante_path(String comprovante_path) {
 		this.comprovante_path = comprovante_path;
 	}
-	
-	
+
+
+	public void setModeloVeiculo(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setCorVeiculo(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setObservacao(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setDataServico(LocalDate value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setAnoFabricacao(LocalDate value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	
 }

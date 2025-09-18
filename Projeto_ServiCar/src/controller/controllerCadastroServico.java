@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 import model.Servico;
 
 public class controllerCadastroServico {
+
+	private static Object servicoEditar;
 
 	@FXML
 	private Button btCadastrar;
@@ -55,7 +58,7 @@ public class controllerCadastroServico {
 	private DatePicker txtDataDoServico;
 
 	@FXML
-	private ChoiceBox<?> txtFormaDePGTO;
+	private ChoiceBox<String> txtFormaDePGTO;
 
 	@FXML
 	private TextField txtMarcaDoVeiculo;
@@ -87,54 +90,94 @@ public class controllerCadastroServico {
 	void actionCadastroVeiculos(ActionEvent event) throws IOException {
 		Main.TelaCadastroServico();
 	}
-
+	
 	@FXML
 	void actionCadastrar(ActionEvent event) {
-		if(txtPlacaDoVeiculo.getText().isEmpty() || txtValorDoServico.getText().isEmpty()
-    			|| txtNomeDoPrestador.getValue() == null) {
-    		Alert erro = new Alert(AlertType.ERROR);
-    		erro.setTitle("Erro ao salvar!");
-    		erro.setContentText("Erro! verifique se todas as informações foram "
-    				+ "preenchidas e tente novamente!");
-    		erro.show();
-    	}else if(!validarPlaca(txtPlacaDoVeiculo.getText())) {
-    		Alert erro = new Alert(AlertType.ERROR);
-    		erro.setTitle("Erro ao salvar!");
-    		erro.setContentText("Erro! verifique se o CPF é valido e "
-    				+ " e tente novamente!");
-    		erro.show();
-    	}else {
-    		Servico servico = new Servico();
-    		ServicoDao servicoDAO = new ServicoDao();
-    		
-    		servico.setDescricao(txtObservacao.getText());
-    		servico.setPrestador_id(txtNomeDoPrestador.getText());
-    		servico.setData_servico(txtDataDoServico.getValue().toString());
-    		servico.setForma_pagamento(txtFormaDePGTO.getValue().toString());
-    		servico.setValor_comissao(txtValorDoServico.getText());
-    		servico.setVeiculo_id(txtPlacaDoVeiculo.getText());
-    		
-    		if(controllerRegistroDeServicos. == null) {
-				clienteDAO.create(cliente);
-				Alert msg = new Alert(AlertType.INFORMATION);
-				msg.setTitle("Sucesso!");
-				msg.setContentText("Cliente cadastrado com sucesso!");
-				msg.show();
-				
-				Stage stage = (Stage) btSalvar.getScene().getWindow();
-				stage.close();
-			}else {
-				clienteDAO.update(cliente);
-				Alert msg = new Alert(AlertType.INFORMATION);
-				msg.setTitle("Sucesso!");
-				msg.setContentText("Cliente atualizado com sucesso!");
-				msg.show();
-				controllerRelatorioClientes.clienteEditar = null;
-				Stage stage = (Stage) btSalvar.getScene().getWindow();
-				stage.close();
-			}
-    	}
+	    // Verifica campos obrigatórios
+	    if (txtNomeDoPrestador.getText().isEmpty()
+	            || txtPlacaDoVeiculo.getText().isEmpty()
+	            || txtModeloDoVeiculo.getText().isEmpty()
+	            || txtMarcaDoVeiculo.getText().isEmpty()
+	            || txtValorDoServico.getText().isEmpty()
+	            || txtComissao.getText().isEmpty()
+	            || txtFormaDePGTO.getValue() == null
+	            || txtDataDoServico.getValue() == null) {
+
+	        Alert erro = new Alert(Alert.AlertType.ERROR);
+	        erro.setTitle("Erro ao cadastrar!");
+	        erro.setContentText("Por favor, preencha todos os campos obrigatórios!");
+	        erro.show();
+	        return;
+
+	    } else if (!validarPlaca(txtPlacaDoVeiculo.getText())) {
+	        Alert erro = new Alert(Alert.AlertType.ERROR);
+	        erro.setTitle("Placa inválida");
+	        erro.setContentText("A placa informada é inválida ou já cadastrada.");
+	        erro.show();
+	        return;
+	    }
+
+	    // Instanciar e preencher objeto Servico
+	    Servico servico = new Servico();
+	    ServicoDao servicoDao = new ServicoDao();
+
+	    servico.setPrestador_id(txtNomeDoPrestador.getText());
+	    servico.setVeiculo_id(txtPlacaDoVeiculo.getText());
+	    servico.setModeloVeiculo(txtModeloDoVeiculo.getText());
+	    servico.setModeloVeiculo(txtMarcaDoVeiculo.getText());
+	    servico.setCorVeiculo(txtCorDoVeiculo.getText());
+	    servico.setForma_pagamento(txtFormaDePGTO.getValue());
+	    servico.setObservacao(txtObservacao.getText());
+
+	    // Datas
+	    servico.setDataServico(txtDataDoServico.getValue());
+	    servico.setAnoFabricacao(txtAnoDeFab.getValue());
+
+	    try {
+	        double valor = Double.parseDouble(txtValorDoServico.getText().replace(",", "."));
+	        double comissao = Double.parseDouble(txtComissao.getText().replace(",", "."));
+
+	        servico.setValor_total(valor);
+	        servico.setValor_comissao(comissao);
+	    } catch (NumberFormatException e) {
+	        Alert erro = new Alert(Alert.AlertType.ERROR);
+	        erro.setTitle("Erro nos valores");
+	        erro.setContentText("Valor do serviço ou comissão inválido(s). Use apenas números.");
+	        erro.show();
+	        return;
+	    }
+
+	    // Verifica se é edição ou novo cadastro
+	    if (controllerCadastroServico.servicoEditar == null) {
+	        servicoDao.create(servico);
+
+	        Alert msg = new Alert(Alert.AlertType.INFORMATION);
+	        msg.setTitle("Sucesso!");
+	        msg.setContentText("Serviço cadastrado com sucesso!");
+	        msg.show();
+
+	        Stage stage = (Stage) btCadastrar.getScene().getWindow();
+	        stage.close();
+
+	    } else {
+	    	servico.setId(((Servico) controllerCadastroServico.servicoEditar).getId());
+
+
+	        servicoDao.update(servico);
+
+	        Alert msg = new Alert(Alert.AlertType.INFORMATION);
+	        msg.setTitle("Sucesso!");
+	        msg.setContentText("Serviço atualizado com sucesso!");
+	        msg.show();
+
+	        controllerCadastroServico.servicoEditar = null;
+
+	        Stage stage = (Stage) btCadastrar.getScene().getWindow();
+	        stage.close();
+	    }
 	}
+
+
 	
 	public static boolean validarPlaca(String placa) {
 		    Set<String> placasCadastradas = new HashSet<>();
