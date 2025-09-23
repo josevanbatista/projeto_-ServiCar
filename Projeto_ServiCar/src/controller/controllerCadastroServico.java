@@ -1,14 +1,20 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
 
 import application.Main;
 import dao.ServicoDao;
+import dao.VeiculoDao;
 
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.Set;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,8 +25,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Servico;
+import model.Veiculo;
 
-public class controllerCadastroServico {
+public class controllerCadastroServico implements Initializable {
 
 	private static Object servicoEditar;
 
@@ -96,8 +103,8 @@ public class controllerCadastroServico {
 	    // Verifica campos obrigatórios
 	    if (txtNomeDoPrestador.getText().isEmpty()
 	            || txtPlacaDoVeiculo.getText().isEmpty()
-	            || txtModeloDoVeiculo.getText().isEmpty()
-	            || txtMarcaDoVeiculo.getText().isEmpty()
+	         //   || txtModeloDoVeiculo.getText().isEmpty()
+	          //  || txtMarcaDoVeiculo.getText().isEmpty()
 	            || txtValorDoServico.getText().isEmpty()
 	            || txtComissao.getText().isEmpty()
 	            || txtFormaDePGTO.getValue() == null
@@ -122,7 +129,12 @@ public class controllerCadastroServico {
 	    ServicoDao servicoDao = new ServicoDao();
 
 	    servico.setPrestador_id(txtNomeDoPrestador.getText());
-	    servico.setVeiculo_id(txtPlacaDoVeiculo.getText());
+	    Veiculo veiculo = new Veiculo();
+	    VeiculoDao veiculoDAO = new VeiculoDao();
+	    veiculo.setPlaca(txtPlacaDoVeiculo.getText());
+	    veiculo = veiculoDAO.search(txtPlacaDoVeiculo.getText()).get(0);
+	    
+	    servico.setVeiculo_id(veiculo.getId());
 	    servico.setModeloVeiculo(txtModeloDoVeiculo.getText());
 	    servico.setModeloVeiculo(txtMarcaDoVeiculo.getText());
 	    servico.setCorVeiculo(txtCorDoVeiculo.getText());
@@ -144,7 +156,6 @@ public class controllerCadastroServico {
 	        erro.setTitle("Erro nos valores");
 	        erro.setContentText("Valor do serviço ou comissão inválido(s). Use apenas números.");
 	        erro.show();
-	        return;
 	    }
 
 	    // Verifica se é edição ou novo cadastro
@@ -160,8 +171,7 @@ public class controllerCadastroServico {
 	        stage.close();
 
 	    } else {
-	    	servico.setId(((Servico) controllerCadastroServico.servicoEditar).getId());
-
+	    	
 
 	        servicoDao.update(servico);
 
@@ -214,10 +224,29 @@ public class controllerCadastroServico {
 	void actionSair(ActionEvent event) throws IOException {
 		Main.TelaLogin();
 	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		txtFormaDePGTO.getItems().addAll("Pix", "Dinheiro", "Cartão");
+		txtFormaDePGTO.setValue("Dinheiro");
+
+		txtNomeDoPrestador.setText(controllerLogin.prestador.getNome());
+		txtNomeDoPrestador.setEditable(false);
+
+		txtValorDoServico.setText("0,00");
+		//txtValorDoServico.setEditable(false);
+		txtComissao.setText("0,00");
+		//txtComissao.setEditable(false);
+
+		}
+
+		
+	}
 	
 	
 
 	
 
 
-}
+

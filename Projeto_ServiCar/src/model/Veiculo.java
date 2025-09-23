@@ -8,7 +8,7 @@ public class Veiculo {
 	private String modelo;
 	private String cor;
 	private String ano;
-	private String observacao;
+	private String observacaes;
 	
 	
 	public Veiculo(String id, String placa, String marca, String modelo, String cor, String ano, String observacao) {
@@ -19,15 +19,21 @@ public class Veiculo {
 		this.modelo = modelo;
 		this.cor = cor;
 		this.ano = ano;
-		this.observacao = observacao;
+		this.observacaes = observacao;
 	}
 //dfdfdfdfdd
+	
+	
 
 	public String getId() {
 		return id;
 	}
 
 
+
+	public Veiculo() {
+	super();
+}
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -84,12 +90,12 @@ public class Veiculo {
 
 
 	public String getObservacao() {
-		return observacao;
+		return observacaes;
 	}
 
 
 	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+		this.observacaes = observacao;
 	}
 	
 	

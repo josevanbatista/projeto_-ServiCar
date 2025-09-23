@@ -35,6 +35,9 @@ public class Servico {
 	}
 
 
+	public static Servico servicoEditar;
+
+
 	public String getId() {
 		return id;
 	}

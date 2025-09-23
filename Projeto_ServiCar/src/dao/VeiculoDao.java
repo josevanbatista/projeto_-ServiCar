@@ -110,7 +110,7 @@ public class VeiculoDao {
         }
     }
 
-    public static ArrayList<Veiculo> search(String pesquisa) {
+    public ArrayList<Veiculo> search(String pesquisa) {
         Connection con = ConnectionDatabase.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -128,13 +128,13 @@ public class VeiculoDao {
 
             while (rs.next()) {
                 Veiculo veiculo = new Veiculo(
-                    rs.getString("idVeiculo"),
+                    rs.getString("id"),
                     rs.getString("placa"),
                     rs.getString("marca"),
                     rs.getString("modelo"),
                     rs.getString("cor"),
                     rs.getString("ano"),
-                    rs.getString("observacao")
+                    rs.getString("observacoes")
                 );
                 veiculos.add(veiculo);
             }
