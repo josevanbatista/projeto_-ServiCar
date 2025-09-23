@@ -44,8 +44,8 @@ public class controllerHome implements Initializable {
 	}
 
 	@FXML
-	void actionRegistroServicos(ActionEvent event) {
-
+	void actionRegistroServicos(ActionEvent event) throws IOException {
+		Main.TelaRegidstroDeServicos();
 	}
 
 	@FXML

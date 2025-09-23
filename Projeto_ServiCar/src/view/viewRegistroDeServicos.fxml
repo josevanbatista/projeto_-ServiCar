@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerRegistroDeServicos">
    <children>
       <Pane layoutY="-3.0" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #004987;">
          <children>
@@ -67,7 +67,7 @@
             </Pane>
             <Pane layoutX="350.0" layoutY="12.0" prefHeight="698.0" prefWidth="715.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <children>
-                  <TextField fx:id="txtNome" layoutX="14.0" layoutY="125.0" prefHeight="38.0" prefWidth="483.0" style="-fx-border-color: #004987; -fx-background-radius: 15; -fx-border-radius: 15;">
+                  <TextField fx:id="txtNome" layoutX="14.0" layoutY="125.0" onKeyPressed="#actonCPFType" onKeyTyped="#actonCPFType" onMouseClicked="#actonCPFClick" prefHeight="38.0" prefWidth="483.0" style="-fx-border-color: #004987; -fx-background-radius: 15; -fx-border-radius: 15;">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -86,7 +86,7 @@
                   <TableView fx:id="tableRegistro" layoutX="15.0" layoutY="178.0" prefHeight="433.0" prefWidth="688.0" style="-fx-border-color: #004987;">
                     <columns>
                       <TableColumn fx:id="columnIndice" prefWidth="38.933319091796875" />
-                        <TableColumn fx:id="columnPlaca" prefWidth="111.99996948242188" text="Modelo do veiculo" />
+                        <TableColumn fx:id="columnModelo" prefWidth="111.99996948242188" text="Modelo" />
                         <TableColumn fx:id="columnData" prefWidth="104.5333251953125" text="data do serviço" />
                         <TableColumn fx:id="columnValor" prefWidth="99.4666748046875" text="valor do Serviço" />
                         <TableColumn fx:id="columnFormaPGTO" prefWidth="126.93341064453125" text="forma de PGTO" />
