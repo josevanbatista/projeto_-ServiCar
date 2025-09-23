@@ -66,7 +66,7 @@ public class controllerCadastroServico implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> txtFormaDePGTO;
-
+//sncocebve vjclw 
 	@FXML
 	private TextField txtMarcaDoVeiculo;
 
