@@ -18,9 +18,9 @@ public class ServicoDao {
         try {
             stmt = con.prepareStatement("INSERT INTO Servico (veiculo_id, prestador_id, data_servico, descricao, valor_total, valor_comissao, forma_pagamento, comprovante_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-            stmt.setInt(1, servico.getVeiculo_id());       // era setString
-            stmt.setInt(2, servico.getPrestador_id());     // era setString
-            stmt.setString(3, servico.getData_servico());  // OK se for String no banco (tipo DATE ou VARCHAR)
+            stmt.setString(1, servico.getVeiculo_id());
+            stmt.setString(2, servico.getPrestador_id());
+            stmt.setString(3, servico.getData_servico());
             stmt.setString(4, servico.getDescricao());
             stmt.setDouble(5, servico.getValor_total());
             stmt.setDouble(6, servico.getValor_comissao());
