@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import ConnectionFactory.ConnectionDatabase;
@@ -11,31 +12,44 @@ import model.Servico;
 
 public class ServicoDao {
 
-    public void create(Servico servico) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-//
-        try {
-            stmt = con.prepareStatement("INSERT INTO Servico (veiculo_id, prestador_id, data_servico, descricao, valor_total, valor_comissao, forma_pagamento, comprovante_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+	public void create(Servico servico) {
+	    Connection con = ConnectionDatabase.getConnection();
+	    PreparedStatement stmt = null;
 
-            stmt.setString(1, servico.getVeiculo_id());
-            stmt.setString(2, servico.getPrestador_id());
-            stmt.setString(3, servico.getData_servico());
-            stmt.setString(4, servico.getDescricao());
-            stmt.setDouble(5, servico.getValor_total());
-            stmt.setDouble(6, servico.getValor_comissao());
-            stmt.setString(7, servico.getForma_pagamento());
-            stmt.setString(8, servico.getComprovante_path());
+	    try {
+	        stmt = con.prepareStatement(
+	            "INSERT INTO Servico (veiculo_id, prestador_id, data_servico, descricao, valor_total, valor_comissao, forma_pagamento, comprovante_path) " +
+	            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-            stmt.execute();
-            System.out.println("Serviço cadastrado com sucesso!");
+	        stmt.setString(1, servico.getVeiculo_id());
+	        stmt.setString(2, servico.getPrestador_id());
 
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar serviço!", e);
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+	        
+	        if (servico.getData_servico() != null) {
+	            stmt.setDate(3, java.sql.Date.valueOf(servico.getData_servico())); // String "yyyy-MM-dd" → sql.Date
+	        } else {
+	            stmt.setNull(3, java.sql.Types.DATE);
+	        }
+
+
+	        stmt.setString(4, servico.getObservacao());
+	        stmt.setDouble(5, servico.getValor_total());
+	        stmt.setDouble(6, servico.getValor_comissao());
+	        stmt.setString(7, servico.getForma_pagamento());
+	        stmt.setString(8, servico.getComprovante_path());
+
+	        stmt.executeUpdate();
+	        System.out.println("Serviço cadastrado com sucesso!");
+
+	    } catch (SQLException e) {
+	        throw new RuntimeException("Erro ao cadastrar serviço!", e);
+	    } finally {
+	        ConnectionDatabase.closeConnection(con, stmt);
+	    }
+	}
+
+
+
 
     public static ArrayList<Servico> read() {
         Connection con = ConnectionDatabase.getConnection();

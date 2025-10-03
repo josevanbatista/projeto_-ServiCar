@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Veiculo {
 	
 	private String id;
@@ -96,6 +98,13 @@ public class Veiculo {
 
 	public void setObservacao(String observacao) {
 		this.observacaes = observacao;
+	}
+
+
+
+	public LocalDate getAnoFabricacao() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -11,146 +11,148 @@ import model.Prestador;
 
 public class PrestadorDao {
 
-    public void create(Prestador prestador) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+	public void create(Prestador prestador) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
 //cv bfgbtbgtbaaa
-        try {
-            stmt = con.prepareStatement("INSERT INTO Prestador (nome, cpf_cnpj, funcao, telefone, email, comissao, observacoes) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, prestador.getNome());
-            stmt.setString(2, prestador.getCpf_cnpj());
-            stmt.setString(3, prestador.getFuncao());
-            stmt.setString(4, prestador.getTelefone());
-            stmt.setString(5, prestador.getEmail());
-            stmt.setDouble(6, prestador.getComissao());
-            stmt.setString(7, prestador.getObservacoes());
+		try {
+			stmt = con.prepareStatement(
+					"INSERT INTO Prestador (nome, cpf_cnpj, funcao, telefone, email, comissao, observacoes) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt.setString(1, prestador.getNome());
+			stmt.setString(2, prestador.getCpf_cnpj());
+			stmt.setString(3, prestador.getFuncao());
+			stmt.setString(4, prestador.getTelefone());
+			stmt.setString(5, prestador.getEmail());
+			stmt.setDouble(6, prestador.getComissao());
+			stmt.setString(7, prestador.getObservacoes());
 
-            stmt.execute();
-            System.out.println("Prestador cadastrado!");
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao cadastrar prestador!", e);
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+			stmt.execute();
+			System.out.println("Prestador cadastrado!");
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao cadastrar prestador!", e);
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
 
-    public static ArrayList<Prestador> read() {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Prestador> prestadores = new ArrayList<>();
+	public static ArrayList<Prestador> read() {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Prestador> prestadores = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Prestador");
-            rs = stmt.executeQuery();
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Prestador");
+			rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Prestador prestador = new Prestador();
-                prestador.setId(rs.getString("idPrestador"));
-                prestador.setNome(rs.getString("nome"));
-                prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
-                prestador.setFuncao(rs.getString("funcao"));
-                prestador.setTelefone(rs.getString("telefone"));
-                prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getDouble("comissao"));
-                prestador.setObservacoes(rs.getString("observacoes"));
+			while (rs.next()) {
+				Prestador prestador = new Prestador();
+				prestador.setId(rs.getString("id"));
+				prestador.setNome(rs.getString("nome"));
+				prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
+				prestador.setFuncao(rs.getString("funcao"));
+				prestador.setTelefone(rs.getString("telefone"));
+				prestador.setEmail(rs.getString("email"));
+				prestador.setComissao(rs.getDouble("comissao"));
+				prestador.setObservacoes(rs.getString("observacoes"));
 
-                prestadores.add(prestador);
-            }
+				prestadores.add(prestador);
+			}
 
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao ler os dados dos prestadores!", e);
-        } finally {
-            ConnectionFactory.ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao ler os dados dos prestadores!", e);
+		} finally {
+			ConnectionFactory.ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
 
-        return prestadores;
-    }
+		return prestadores;
+	}
 
-    public void delete(int idPrestador) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+	public void delete(int idPrestador) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
 
-        try {
-            stmt = con.prepareStatement("DELETE FROM Prestador WHERE idPrestador = ?");
-            stmt.setInt(1, idPrestador);
+		try {
+			stmt = con.prepareStatement("DELETE FROM Prestador WHERE idPrestador = ?");
+			stmt.setInt(1, idPrestador);
 
-            stmt.execute();
-            System.out.println("Prestador excluído!");
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao excluir prestador!", e);
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
+			stmt.execute();
+			System.out.println("Prestador excluído!");
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao excluir prestador!", e);
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
+	
+	
+	
 
-    public static ArrayList<Prestador> search(String pesquisar) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        pesquisar = "%" + pesquisar + "%";
-        ArrayList<Prestador> prestadores = new ArrayList<>();
+	public static ArrayList<Prestador> search(String pesquisar) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		pesquisar = "%" + pesquisar + "%";
+		ArrayList<Prestador> prestadores = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement("SELECT * FROM Prestador WHERE nome LIKE ? OR cpf_cnpj LIKE ?");
-            stmt.setString(1, pesquisar);
-            stmt.setString(2, pesquisar);
+		try {
+			stmt = con.prepareStatement("SELECT * FROM Prestador WHERE nome LIKE ? OR cpf_cnpj LIKE ?");
+			stmt.setString(1, pesquisar);
+			stmt.setString(2, pesquisar);
 
-            rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Prestador prestador = new Prestador();
-                prestador.setId(rs.getString("idPrestador"));
-                prestador.setNome(rs.getString("nome"));
-                prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
-                prestador.setFuncao(rs.getString("funcao"));
-                prestador.setTelefone(rs.getString("telefone"));
-                prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getDouble("comissao"));
-                prestador.setObservacoes(rs.getString("observacoes"));
+			while (rs.next()) {
+				Prestador prestador = new Prestador();
+				prestador.setId(rs.getString("id	"));
+				prestador.setNome(rs.getString("nome"));
+				prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
+				prestador.setFuncao(rs.getString("funcao"));
+				prestador.setTelefone(rs.getString("telefone"));
+				prestador.setEmail(rs.getString("email"));
+				prestador.setComissao(rs.getDouble("comissao"));
+				prestador.setObservacoes(rs.getString("observacoes"));
 
-                prestadores.add(prestador);
-            }
+				prestadores.add(prestador);
+			}
 
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar prestadores!", e);
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt, rs);
-        }
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao buscar prestadores!", e);
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
 
-        return prestadores;
-    }
+		return prestadores;
+	}
 
-    public void update(Prestador prestador) {
-        Connection con = ConnectionDatabase.getConnection();
-        PreparedStatement stmt = null;
+	public void update(Prestador prestador) {
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
 
-        try {
-            stmt = con.prepareStatement(
-                "UPDATE Prestador SET nome = ?, cpf_cnpj = ?, funcao = ?, telefone = ?, email = ?, comissao = ?, observacoes = ?, senha = ? WHERE idPrestador = ?"
-            );
+		try {
+			stmt = con.prepareStatement(
+					"UPDATE Prestador SET nome = ?, cpf_cnpj = ?, funcao = ?, telefone = ?, email = ?, comissao = ?, observacoes = ?, senha = ? WHERE idPrestador = ?");
 
-            stmt.setString(1, prestador.getNome());
-            stmt.setString(2, prestador.getCpf_cnpj());
-            stmt.setString(3, prestador.getFuncao());
-            stmt.setString(4, prestador.getTelefone());
-            stmt.setString(5, prestador.getEmail());
-            stmt.setDouble(6, prestador.getComissao());
-            stmt.setString(7, prestador.getObservacoes());
-            stmt.setString(8, prestador.getSenha());
-            stmt.setString(9, prestador.getId());
-            
+			stmt.setString(1, prestador.getNome());
+			stmt.setString(2, prestador.getCpf_cnpj());
+			stmt.setString(3, prestador.getFuncao());
+			stmt.setString(4, prestador.getTelefone());
+			stmt.setString(5, prestador.getEmail());
+			stmt.setDouble(6, prestador.getComissao());
+			stmt.setString(7, prestador.getObservacoes());
+			stmt.setString(8, prestador.getSenha());
+			stmt.setString(9, prestador.getId());
 
-            stmt.executeUpdate();
-            System.out.println("Prestador atualizado!");
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar prestador!", e);
-        } finally {
-            ConnectionDatabase.closeConnection(con, stmt);
-        }
-    }
-    
-    public Prestador autenticarUser(String user, String password) {
+			stmt.executeUpdate();
+			System.out.println("Prestador atualizado!");
+		} catch (SQLException e) {
+			throw new RuntimeException("Erro ao atualizar prestador!", e);
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt);
+		}
+	}
+
+	public Prestador autenticarUser(String user, String password) {
 		Connection con = ConnectionDatabase.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -160,25 +162,53 @@ public class PrestadorDao {
 			stmt.setString(1, user);
 			stmt.setString(2, password);
 			rs = stmt.executeQuery();
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				prestador.setId(rs.getString("id"));
-                prestador.setNome(rs.getString("nome"));
-                prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
-                prestador.setFuncao(rs.getString("funcao"));
-                prestador.setTelefone(rs.getString("telefone"));
-                prestador.setEmail(rs.getString("email"));
-                prestador.setComissao(rs.getDouble("comissao"));
-                prestador.setObservacoes(rs.getString("observacoes"));
-                prestador.setSenha(rs.getString("senha"));
+				prestador.setNome(rs.getString("nome"));
+				prestador.setCpf_cnpj(rs.getString("cpf_cnpj"));
+				prestador.setFuncao(rs.getString("funcao"));
+				prestador.setTelefone(rs.getString("telefone"));
+				prestador.setEmail(rs.getString("email"));
+				prestador.setComissao(rs.getDouble("comissao"));
+				prestador.setObservacoes(rs.getString("observacoes"));
+				prestador.setSenha(rs.getString("senha"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new RuntimeException("Erro ao pesquisar os dados!",e);
-		}finally {
+			throw new RuntimeException("Erro ao pesquisar os dados!", e);
+		} finally {
 			ConnectionDatabase.closeConnection(con, stmt, rs);
 		}
 		return prestador;
 	}
-    
+
+	public ArrayList<Prestador> listarPrestadores() {
+		ArrayList<Prestador> prestadores = new ArrayList<>();
+
+		Connection con = ConnectionDatabase.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			stmt = con.prepareStatement("SELECT id, nome, comissao FROM prestador");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Prestador p = new Prestador();
+				p.setId(rs.getString("id"));
+				p.setNome(rs.getString("nome"));
+				p.setComissao(rs.getDouble("comissao"));
+
+				prestadores.add(p); // ✅ adiciona na lista local
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ConnectionDatabase.closeConnection(con, stmt, rs);
+		}
+
+		return prestadores; // ✅ retorna a lista preenchida
+	}
+
 }

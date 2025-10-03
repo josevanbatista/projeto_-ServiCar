@@ -91,9 +91,10 @@ public class controllerRegistroDeServicos implements Initializable {
 			prestadores = prestadorDao.search(prestador.getNome());
 			prestador = prestadores.get(0);
 			txtNome.setText(prestador.getNome());
-		} else {
-			txtNome.setText("");
-		}
+			//		} else {
+			//			txtNome.setText("");
+			//		}
+		}	
 	}
 
 	@FXML
@@ -106,8 +107,9 @@ public class controllerRegistroDeServicos implements Initializable {
 			prestadores = prestadorDao.search(prestador.getNome());
 			prestador = prestadores.get(0);
 			txtNome.setText(prestador.getNome());
-		} else {
-			txtNome.setText("");
+			//		} else {
+			//			txtNome.setText("");
+			//		}
 		}
 	}
 
